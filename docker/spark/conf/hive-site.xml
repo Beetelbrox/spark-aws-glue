@@ -1,0 +1,14 @@
+<configuration>
+    <!-- <property>
+        <name>hive.metastore.client.factory.class</name>
+        <value>com.amazonaws.glue.catalog.metastore.AWSGlueDataCatalogHiveClientFactory</value>
+    </property> -->
+    <property>
+        <name>hive.imetastoreclient.factory.class</name>
+        <value>com.amazonaws.glue.catalog.metastore.AWSGlueDataCatalogHiveClientFactory</value>
+    </property>
+  <property>
+    <name>aws.region</name>
+    <value>eu-west-1</value>
+  </property>
+</configuration>
