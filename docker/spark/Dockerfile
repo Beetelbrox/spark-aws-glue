@@ -71,6 +71,7 @@ RUN git clone https://github.com/apache/spark.git --branch v${SPARK_VERSION} --s
 FROM openjdk:8 AS spark-base
 # Import args into the stage
 ARG AWS_JAVA_SDK_VERSION
+ARG HADOOP_VERSION
 ARG SPARK_HOME
 ARG SPARK_JARS=${SPARK_HOME}/jars
 
@@ -78,12 +79,13 @@ COPY --from=build-spark /opt/spark/dist ${SPARK_HOME}/
 COPY --from=build-glue-client-for-hive /catalog/output-jars ${SPARK_JARS}/
 COPY conf ${SPARK_HOME}/conf
 # Add the glue client to the jars, get an updated version of the aws-java-sdk bundle & update Guava to a
-# compatible version
+# compatible version. This is copied from one of the repos and I'm not sure if it's even needed.
 RUN wget --quiet https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/${AWS_JAVA_SDK_VERSION}/aws-java-sdk-bundle-${AWS_JAVA_SDK_VERSION}.jar -P ${SPARK_JARS}/
 RUN chmod 0644 ${SPARK_JARS}/aws-java-sdk-bundle*.jar
 RUN rm -f ${SPARK_JARS}/guava-14.0.1.jar
 RUN wget --quiet https://repo1.maven.org/maven2/com/google/guava/guava/23.0/guava-23.0.jar -P ${SPARK_JARS}/
 RUN chmod 0644 ${SPARK_JARS}/guava-23.0.jar
+RUN wget https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/${HADOOP_VERSION}/hadoop-aws-${HADOOP_VERSION}.jar -P ${SPARK_HOME}/jars/
 
 # Stage 5: Output stage
 FROM openjdk:8 AS spark-output

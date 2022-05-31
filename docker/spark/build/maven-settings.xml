@@ -1,3 +1,4 @@
+
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
@@ -12,7 +13,8 @@ xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.
         <repository>
           <id>nexus.pentaho.org</id>
           <name>nexus</name>
-          <url>http://nexus.pentaho.org/content/groups/omni</url>
+          <url>
+          https://public.nexus.pentaho.org/repository/proxy-public-3rd-party-release</url>
         </repository>
       </repositories>
     </profile>
